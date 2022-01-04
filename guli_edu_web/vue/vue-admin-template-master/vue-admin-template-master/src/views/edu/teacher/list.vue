@@ -1,5 +1,49 @@
 <template>
   <div class="app-container">
+    <!--查询表单-->
+    <template>
+      <el-form
+        :inline="true"
+        :model="teacherQuery"
+        class="demo-form-inline"
+        style="text-align: center"
+      >
+        <el-form-item label="讲师名">
+          <el-input v-model="teacherQuery.name" placeholder="讲师名"></el-input>
+        </el-form-item>
+        <el-form-item label="讲师头衔">
+          <el-select v-model="teacherQuery.level" placeholder="讲师头衔">
+            <el-option label="高级讲师" value="1"></el-option>
+            <el-option label="首席讲师" value="2"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="添加时间">
+          <el-date-picker
+            v-model="teacherQuery.begin"
+            type="datetime"
+            placeholder="选择开始时间"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            default-time="00:00:00"
+          />
+        </el-form-item>
+        <el-form-item size="normal">
+          <el-date-picker
+            v-model="teacherQuery.end"
+            type="datetime"
+            placeholder="选择截至时间"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            default-time="00:00:00"
+          />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="getTeacherListPage()"
+            >查询</el-button
+          >
+          <el-button type="default" @click="resetData()">清空</el-button>
+        </el-form-item>
+      </el-form>
+    </template>
+    <!-- 表格 -->
     <el-table
       :data="list"
       v-loading="listLoading"
@@ -33,16 +77,30 @@
             type="danger"
             size="mini"
             icon="el-icon-delete"
-            @click="removeDataById(scope.row.id)"
+            @click="removeTeacherById(scope.row.id)"
             >删除
           </el-button>
         </template>
       </el-table-column>
     </el-table>
+    <!-- 分页功能 -->
+    <template>
+      <!-- total记录总数，page-size每页记录数,pager-count 设置最大页码按钮在第几个位置,current-change 当前页改变时触发 -->
+      <el-pagination
+        :page-size="size"
+        :pager-count="5"
+        :current-page="page"
+        :total="total"
+        layout="total, prev, pager, next, jumper"
+        style="padding: 30px 0; text-align: center"
+        @current-change="getTeacherListPage"
+      >
+      </el-pagination>
+    </template>
   </div>
 </template>
 <script>
-//引入teacher.jswe
+//引入teacher.js
 import teacher from "@/api/edu/teacher";
 
 export default {
@@ -63,8 +121,10 @@ export default {
   },
   // 创建具体的方法，调用teacher.js定义的方法
   methods: {
-    //调用讲师列表
-    getTeacherListPage() {
+    //讲师列表
+    getTeacherListPage(page = 1) {
+      //不传入page默认为1
+      this.page = page; //当page发现改变时，传入当前page
       this.listLoading = true;
       teacher
         .getTeacherListPage(this.page, this.size, this.teacherQuery)
@@ -79,6 +139,33 @@ export default {
           //请求失败
           console.log(err);
         });
+    },
+    //清空查询条件
+    resetData() {
+      this.teacherQuery = {};
+      this.getTeacherListPage();
+    },
+    //删除讲师
+    removeTeacherById(id) {
+      //1.删除前提示是否继续删除
+      this.$confirm("此操作将永久删除讲师记录,是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).then(() => { //2.选择继续删除
+        //3.调用删除记录的接口
+        teacher
+          .removeTeacherById(id)
+          .then((result) => {
+            //4.提示删除成功
+            this.$message({
+              type: "success",
+              message: "删除成功!",
+            });
+          })
+        //5.刷新页面
+        this.getTeacherListPage();
+      });
     },
   },
 };

@@ -70,9 +70,9 @@ export const constantRoutes = [
       },
       {
         path: 'save',
-        name: '添加讲师',
+        name: '讲师添加',
         component: () => import('@/views/edu/teacher/save'),
-        meta: { title: '添加讲师', icon: 'tree' }
+        meta: { title: '讲师添加', icon: 'tree' }
       }
     ]
   },

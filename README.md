@@ -809,7 +809,7 @@ export function logout() {
 
    controller类上添加注解`@CrossOrigin`
 
-## 05、讲师列表功能前端实现
+## 05、讲师CRUD功能前端实现
 
 1. 添加讲师列表和添加讲师路由
 
@@ -1034,6 +1034,339 @@ export function logout() {
    测试：
 
    ![](README.assets/image-20220102184039863.png)
+
+### 05-1、讲师列表-分页功能实现
+
+1. 从element-ui选择分页组件写入`list.vue`并修改total,pagesize,pager-count和current-change参数
+
+   ```vue
+   <template>
+     <div class="app-container">
+       <el-table
+         :data="list"
+         v-loading="listLoading"
+         element-loading-text="数据加载中"
+         border
+         fit
+         highlight-current-row
+       >
+         <el-table-column label="序号" width="70" align="center">
+           <template slot-scope="scope">
+             {{ (page - 1) * size + scope.$index + 1 }}
+           </template>
+         </el-table-column>
+         <el-table-column width="80" prop="name" label="名称" />
+         <el-table-column label="头衔" width="80">
+           <template slot-scope="scope">
+             {{ scope.row.level === 1 ? "高级讲师" : "首席讲师" }}
+           </template>
+         </el-table-column>
+         <el-table-column prop="intro" label="资历" />
+         <el-table-column prop="gmtCreate" label="添加时间" width="160" />
+         <el-table-column prop="sort" label="排序" width="60" />
+         <el-table-column label="操作" width="200" align="center">
+           <template slot-scope="scope">
+             <router-link :to="'/edu/teacher/edit/' + scope.row.id">
+               <el-button type="primary" size="mini" icon="el-icon-edit"
+                 >修改</el-button
+               >
+             </router-link>
+             <el-button
+               type="danger"
+               size="mini"
+               icon="el-icon-delete"
+               @click="removeDataById(scope.row.id)"
+               >删除
+             </el-button>
+           </template>
+         </el-table-column>
+       </el-table>
+       <!-- 分页功能 -->
+       <template>
+         <!-- total记录总数，page-size每页记录数,pager-count 设置最大页码按钮在第几个位置,current-change 当前页改变时触发 -->
+         <el-pagination
+           :page-size="size"
+           :pager-count="5"
+           :current-page="page"
+           :total="total"
+           layout="total, prev, pager, next, jumper"
+           style="padding:30px 0; text-align:center"
+           @current-change="getTeacherListPage"
+         >
+         </el-pagination>
+       </template>
+     </div>
+   </template>
+   ```
+
+2. 对应`@current-change`当前页改变时传入当前页码
+
+   ```javascript
+     methods: {
+       //调用讲师列表
+       getTeacherListPage(page = 1) {//不传入page默认为1
+         this.page = page //当page发现改变时，传入当前page
+         this.listLoading = true;
+         teacher
+           .getTeacherListPage(this.page, this.size, this.teacherQuery)
+           .then((result) => {
+             //请求成功
+             this.list = result.data.rows;
+             this.total = result.data.total;
+             console.log(this.list);
+             this.listLoading = false;
+           })
+           .catch((err) => {
+             //请求失败
+             console.log(err);
+           });
+       },
+     },
+   ```
+
+3. 效果
+
+   ![](README.assets/image-20220104105643052.png)
+
+### 05-2、讲师查询功能实现
+
+1. 从element-ui选择form表单组件写入`list.vue`,加在表格列表的前面
+
+   ```vue
+       <!--查询表单-->
+       <template>
+         <el-form :inline="true" :model="teacherQuery" class="demo-form-inline" style="text-align:center">
+           <el-form-item label="讲师名">
+             <el-input v-model="teacherQuery.name" placeholder="讲师名"></el-input>
+           </el-form-item>
+           <el-form-item label="讲师头衔">
+             <el-select v-model="teacherQuery.level" placeholder="讲师头衔">
+               <el-option label="高级讲师" value="1"></el-option>
+               <el-option label="首席讲师" value="2"></el-option>
+             </el-select>
+           </el-form-item>
+           <el-form-item label="添加时间">
+             <el-date-picker
+               v-model="teacherQuery.begin"
+               type="datetime"
+               placeholder="选择开始时间"
+               value-format="yyyy-MM-dd HH:mm:ss"
+               default-time="00:00:00"
+             />
+           </el-form-item>
+           <el-form-item size="normal">
+             <el-date-picker
+               v-model="teacherQuery.end"
+               type="datetime"
+               placeholder="选择截至时间"
+               value-format="yyyy-MM-dd HH:mm:ss"
+               default-time="00:00:00"
+             />
+           </el-form-item>
+           <el-form-item>
+             <el-button type="primary" @click="getTeacherListPage()">查询</el-button>
+             <el-button type="default" @click="resetData()">清空</el-button>
+           </el-form-item>
+         </el-form>
+       </template>
+       <!-- 表格 -->
+   ```
+
+2. 在js添加清空条件方法
+
+   ```javascript
+   resetData() {
+       this.teacherQuery = {};
+       this.getTeacherListPage();
+   },
+   ```
+
+3. 效果
+
+   ![](README.assets/image-20220104134852790.png)
+
+### 05-3、讲师删除
+
+1. 每条记录后面添加删除按钮
+
+   <img src="README.assets/image-20220104135314705.png" style="zoom: 67%;" />
+
+2. 在按钮上绑定删除事件，并传参删除的记录的id
+
+   ```vue
+   <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeTeacherById(scope.row.id)">删除</el-button>
+   ```
+
+3. 在`api/edu/teacher.js`定义删除接口
+
+   ```javascript
+   /**
+        * 根据id逻辑删除讲师
+        * @param {*} id 讲师id
+        * @returns 
+        */
+   removeTeacherById(id) {
+       return request({
+           url: `/eduservice/edu-teacher/${id}`,
+           method: "delete"
+       })
+   }
+   ```
+
+4. 在`views/list.vue`实现确认删除功能，选择确定后再调用删除接口
+
+   ```javascript
+   removeTeacherById(id) {
+       //1.删除前提示是否继续删除
+       this.$confirm("此操作将永久删除讲师记录,是否继续?", "提示", {
+           confirmButtonText: "确定",
+           cancelButtonText: "取消",
+           type: "warning",
+       }).then(() => { //2.选择继续删除
+           //3.调用删除记录的接口
+           teacher
+               .removeTeacherById(id)
+               .then((result) => {
+               //4.提示删除成功
+               this.$message({
+                   type: "success",
+                   message: "删除成功!",
+               });
+           })
+           //5.刷新页面
+           this.getTeacherListPage();
+       });
+   },
+   ```
+
+5. 效果
+
+   1. 点击删除目标
+
+      <img src="README.assets/image-20220104154150003.png" style="zoom:67%;" />
+
+   2. 确定删除
+
+      <img src="README.assets/image-20220104154230268.png" style="zoom: 80%;" />
+
+### 05-4、讲师添加
+
+1. 从element-ui选择form表单组件写入`save.vue`
+
+   ```vue
+   <template>
+     <div class="app-container">
+       <h2>讲师添加</h2>
+       <el-form label-width="120px">
+         <!-- 讲师名称 -->
+         <el-form-item label="讲师名称">
+           <el-input v-model="teacher.name"></el-input>
+         </el-form-item>
+         <!-- 讲师排序 -->
+         <el-form-item label="讲师排序">
+           <el-input-number
+             v-model="teacher.sort"
+             controls-position="right"
+             :min="0"
+           />
+         </el-form-item>
+         <!-- 讲师头衔 -->
+         <el-form-item label="讲师头衔">
+           <el-select v-model="teacher.level" placeholder="请选择" clearable>
+             <!-- 
+               数据类型一定要和取出的json中的一致 否则没法回填,
+               因此，这里value使用动态绑定的值，保证其数据类型是number
+            -->
+             <el-option :value="1" label="高级讲师" />
+             <el-option :value="2" label="首席讲师" />
+           </el-select>
+         </el-form-item>
+         <!-- 讲师资历 -->
+         <el-form-item label="讲师资历">
+           <el-input v-model="teacher.career" />
+         </el-form-item>
+         <!-- 讲师简介 -->
+         <el-form-item label="讲师简介">
+           <el-input v-model="teacher.intro" :rows="10" type="textarea" />
+         </el-form-item>
+         <!-- 讲师头像 -->
+         <el-form-item>
+           <el-button
+             type="primary"
+             @click="saveOrUpdate"
+             :disabled="saveBtnDisabled"
+             >保存</el-button
+           >
+         </el-form-item>
+       </el-form>
+     </div>
+   </template>
+   ```
+
+   页面效果：![](README.assets/image-20220104195608648.png)
+
+2. 在`api`添加`添加讲师`接口
+
+   ```javascript
+   /**
+     * 添加讲师
+     * @param {} teacher 
+     * @returns 
+     */
+   addTeacher(teacher) {
+       return request({
+           url: `/eduservice/edu-teacher/addTeacher`,
+           method: "post",
+           data: teacher
+       })
+   }
+   ```
+
+3. 在`views`调用api的接口
+
+   ```javascript
+   <script>
+   import teacherApi from "@/api/edu/teacher";
+   export default {
+     data() {
+       return {
+         teacher: {},
+         saveBtnDisabled: false, //点击一次后按钮是否被禁用
+       };
+     },
+     created() {},
+     methods: {
+       saveOrUpdate() {
+         this.saveTeacher();
+       },
+       //添加讲师的方法
+       saveTeacher() {
+         teacherApi.addTeacher(this.teacher).then((result) => {
+           //1.提示添加成功信息
+           this.$message({
+             type: "success",
+             message: "添加成功！",
+           });
+           //2.返回讲师列表（路由跳转）
+           this.$router.push({ path: "/teacher/table" });
+         });
+       },
+     },
+   };
+   </script>
+   ```
+
+4. 测试
+
+   1. 进入讲师添加页面
+   2. 填写讲师信息提交
+   3. 显示添加成功，跳转讲师列表
+
+
+
+
+
+
 
 
 
