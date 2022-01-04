@@ -47,6 +47,8 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         if (!StringUtils.isBlank(end)) {
             queryWrapper.le("gmt_create", end);
         }
+        //时间降序排序(最新添加的排最前)
+        queryWrapper.orderByDesc("gmt_create");
         Page<EduTeacher> page = baseMapper.selectPage(teacherPage, queryWrapper);
         log.info("page,{}",page.getRecords());
     }

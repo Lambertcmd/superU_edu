@@ -58,7 +58,7 @@ public class EduTeacherController {
     @ApiOperation("根据id逻辑删除讲师")
     @ApiImplicitParam(name = "id",value = "讲师id")
     @DeleteMapping("/{id}")
-    public R removeTeacher(@PathVariable("id") String id){
+    public R removeTeacherById(@PathVariable("id") String id){
         boolean flag = teacherService.removeById(id);
         return flag ? R.ok() : R.error();
     }
@@ -123,6 +123,7 @@ public class EduTeacherController {
     @PostMapping("/addTeacher")
     @ApiOperation("添加讲师")
     public R addTeacher(@RequestBody EduTeacher eduTeacher){
+        log.info("添加讲师,name:"+eduTeacher.getName());
         boolean save = teacherService.save(eduTeacher);
         return save ? R.ok() : R.error();
     }
@@ -141,6 +142,11 @@ public class EduTeacherController {
     }
 
 
+    /**
+     * 修改讲师信息
+     * @param eduTeacher
+     * @return
+     */
     @ApiOperation("修改讲师")
     @PostMapping("/updateTeacher")
     public R updateTeacher(@RequestBody EduTeacher eduTeacher){
