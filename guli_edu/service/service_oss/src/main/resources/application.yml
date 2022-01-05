@@ -1,0 +1,16 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: service-oss
+  #开发环境设置
+  profiles:
+    active: dev
+
+aliyun:
+  oss:
+    file:
+      enpoint: oss-cn-shenzhen.aliyuncs.com
+      keyid: LTAI5tPvpheNZzHZqu2Htgko
+      keysecret: T18RmuOTonkTn7oyzGoUCrgIqWx28v
+      bucketname: guli-file--upload

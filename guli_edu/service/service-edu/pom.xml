@@ -10,16 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>service-edu</artifactId>
-
-    <dependencies>
-        <!--devtools-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-    </dependencies>
     <build>
         <plugins>
             <plugin>

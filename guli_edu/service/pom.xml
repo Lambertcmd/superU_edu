@@ -12,6 +12,9 @@
     <artifactId>service</artifactId>
 
     <packaging>pom</packaging>
+    <modules>
+        <module>service_oss</module>
+    </modules>
 
     <dependencies>
 
@@ -49,7 +52,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!-- velocity 模板引擎, Mybatis Plus 代码生成器需要 -->
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
@@ -110,6 +112,13 @@
             <groupId>com.geek</groupId>
             <artifactId>service_base</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--devtools-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
         </dependency>
 
     </dependencies>
