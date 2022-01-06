@@ -4,6 +4,7 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.geek.oss.service.OssService;
 import com.geek.oss.utils.ConstantPropertiesUtil;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,8 +42,14 @@ public class OssServiceImpl implements OssService {
             // 给文件名称添加一个随机的名称，使每个文件名都不相同
             String uuid = UUID.randomUUID().toString().replaceAll("-","");
 
-            // 3.调用oss方法实现上传 put(buckteName,上传到oss的文件路径和名称,上传文件输入流)
-            ossClient.putObject(bucketName, uuid + filename, inputStream);
+            filename =  uuid + filename;
+            //把文件按照日期进行分类 (2022/01/06/01.jpg)
+            //获取当前日期
+            String datePath = new DateTime().toString("yyyy/MM/dd");
+            filename = datePath + "/" + filename;
+
+            // 3.调用oss方法实现上传 put(buckteName,上传到oss的文件路径和名称(aa/bb/ab.jpg),上传文件输入流)
+            ossClient.putObject(bucketName, filename, inputStream);
 
             // 4.关闭OSSClient。
             ossClient.shutdown();

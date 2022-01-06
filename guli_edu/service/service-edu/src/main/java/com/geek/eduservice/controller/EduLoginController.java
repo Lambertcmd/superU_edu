@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * @Version 1.0
  **/
 @RestController
-@RequestMapping("eduservice/user")
+@RequestMapping("/eduservice/user")
 @CrossOrigin //解决跨域
 @Slf4j
 public class EduLoginController {
