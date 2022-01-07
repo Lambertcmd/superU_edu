@@ -10,6 +10,7 @@ import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,8 +22,7 @@ import lombok.Setter;
  * @author Lambert
  * @since 2021-12-27
  */
-@Getter
-@Setter
+@Data
 @TableName("edu_teacher")
 @ApiModel(value = "EduTeacher对象", description = "讲师")
 public class EduTeacher implements Serializable {

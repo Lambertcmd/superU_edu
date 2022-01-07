@@ -20,7 +20,7 @@ import java.util.Collections;
 public class CodeGenerator {
     static final String URL = "jdbc:mysql://localhost:3306/guli_edu?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=true";
     public static void main(String[] args) {
-        String projectPath = "H:\\projectPractic\\guli_edu\\guli_edu\\service\\service-edu";//获取项目路径
+        String projectPath = "D:\\project_develop\\guli_edu\\guli_edu\\service\\service-edu";//获取项目路径
         FastAutoGenerator.create(URL, "root", "123456")
                 //全局配置
                 .globalConfig(builder -> {
@@ -39,13 +39,13 @@ public class CodeGenerator {
                             .serviceImpl("service.impl")
                             .controller("controller")
                             .entity("entity")
-                            .mapper("mapper")
-                            //自定义输出路径，mapper.xml生成到resources目录下
-                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, projectPath + "/src/main/resources/mapper"));
+                            .mapper("mapper");
+//                            //自定义输出路径，mapper.xml生成到resources目录下
+//                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, projectPath + "/src/main/resources/mapper"));
                 })
                 //策略配置
                 .strategyConfig(builder -> {
-                    builder.addInclude("edu_teacher")
+                    builder.addInclude("edu_subject")
                             .addTablePrefix("eduservice_")//表前缀
                             .serviceBuilder().formatServiceFileName("%sService")//去掉Service的 "I" 前缀
                             .controllerBuilder().enableRestStyle()//restful开启,url中驼峰转连字符
