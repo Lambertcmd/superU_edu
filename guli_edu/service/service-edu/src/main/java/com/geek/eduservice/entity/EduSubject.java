@@ -1,13 +1,13 @@
 package com.geek.eduservice.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * <p>
@@ -19,6 +19,8 @@ import lombok.Setter;
  */
 @Data
 @TableName("edu_subject")
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(value = "EduSubject对象", description = "课程科目")
 public class EduSubject implements Serializable {
 
@@ -36,9 +38,11 @@ public class EduSubject implements Serializable {
     @ApiModelProperty("排序字段")
     private Integer sort;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty("创建时间")
     private Date gmtCreate;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty("更新时间")
     private Date gmtModified;
 

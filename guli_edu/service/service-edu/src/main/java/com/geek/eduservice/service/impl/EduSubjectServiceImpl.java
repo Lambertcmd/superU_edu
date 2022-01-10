@@ -7,6 +7,7 @@ import com.geek.eduservice.listener.SubjectExcelListener;
 import com.geek.eduservice.mapper.EduSubjectMapper;
 import com.geek.eduservice.service.EduSubjectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,15 +22,18 @@ import java.io.InputStream;
  * @since 2022-01-07
  */
 @Service
+@Slf4j
 public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubject> implements EduSubjectService {
 
     @Override
-    public void saveSubject(MultipartFile file) {
+    public void saveSubject(MultipartFile file,EduSubjectService subjectService) {
+
         try{
+            log.info("file:"+file.getOriginalFilename());
             //1.获取文件输入流
             InputStream inputStream = file.getInputStream();
             //2.调用方法进行读取文件
-            EasyExcel.read(inputStream, SubjectData.class,new SubjectExcelListener()).sheet("课程分类").doRead();
+            EasyExcel.read(inputStream, SubjectData.class,new SubjectExcelListener(subjectService)).sheet("课程分类").doRead();
         }catch(Exception e){
             e.printStackTrace();
         }

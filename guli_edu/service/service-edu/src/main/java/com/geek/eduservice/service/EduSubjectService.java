@@ -18,5 +18,5 @@ public interface EduSubjectService extends IService<EduSubject> {
      * 从excel导入课程
      * @param file
      */
-    void saveSubject(MultipartFile file);
+    void saveSubject(MultipartFile file,EduSubjectService subjectService);
 }
