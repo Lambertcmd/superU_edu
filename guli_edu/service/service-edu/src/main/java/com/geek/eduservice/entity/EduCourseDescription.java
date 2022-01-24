@@ -4,42 +4,33 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
- * 课程科目
+ * 课程简介
  * </p>
  *
  * @author Lambert
- * @since 2022-01-07
+ * @since 2022-01-23
  */
-@Data
-@TableName("edu_subject")
-@NoArgsConstructor
-@AllArgsConstructor
-@ApiModel(value = "EduSubject对象", description = "课程科目")
-public class EduSubject implements Serializable {
+@Getter
+@Setter
+@TableName("edu_course_description")
+@ApiModel(value = "EduCourseDescription对象", description = "课程简介")
+public class EduCourseDescription implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("课程类别ID")
+    @ApiModelProperty("课程ID")
     private String id;
 
-    @ApiModelProperty("类别名称")
-    private String title;
-
-    @ApiModelProperty("父ID")
-    private String parentId;
-
-    @ApiModelProperty("排序字段")
-    private Integer sort;
+    @ApiModelProperty("课程简介")
+    private String description;
 
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty("创建时间")
@@ -48,5 +39,6 @@ public class EduSubject implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty("更新时间")
     private Date gmtModified;
+
 
 }

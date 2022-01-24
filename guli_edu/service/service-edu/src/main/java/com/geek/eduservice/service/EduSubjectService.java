@@ -2,7 +2,10 @@ package com.geek.eduservice.service;
 
 import com.geek.eduservice.entity.EduSubject;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.geek.eduservice.entity.category.TopCategory;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * <p>
@@ -19,4 +22,6 @@ public interface EduSubjectService extends IService<EduSubject> {
      * @param file
      */
     void saveSubject(MultipartFile file,EduSubjectService subjectService);
+
+    List<TopCategory> getAllSubject();
 }
