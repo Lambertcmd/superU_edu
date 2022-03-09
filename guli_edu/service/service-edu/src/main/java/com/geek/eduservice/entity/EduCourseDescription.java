@@ -7,8 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * <p>
@@ -18,8 +17,9 @@ import lombok.Setter;
  * @author Lambert
  * @since 2022-01-23
  */
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName("edu_course_description")
 @ApiModel(value = "EduCourseDescription对象", description = "课程简介")
 public class EduCourseDescription implements Serializable {

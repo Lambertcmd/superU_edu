@@ -3,6 +3,7 @@ package com.geek.eduservice.controller;
 
 import com.geek.commonutils.R;
 import com.geek.eduservice.entity.vo.CourseInfoVo;
+import com.geek.eduservice.entity.vo.CoursePublishVo;
 import com.geek.eduservice.service.EduCourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
@@ -33,6 +34,32 @@ public class EduCourseController {
         //返回添加成功后的课程id
         String id = courseService.saveCourseInfo(courseInfoVo);
         return R.ok().data("courseId",id);
+    }
+
+    /**
+     * 根据课程id查询课程信息
+     * @param courseId
+     * @return
+     */
+    @ApiOperation("根据课程id查询课程基本信息")
+    @GetMapping("getCourseInfo/{courseId}")
+    public R getCourseInfo(@PathVariable("courseId") String courseId){
+        CourseInfoVo courseInfoVo = courseService.getCourseInfo(courseId);
+        return R.ok().data("courseInfoVo",courseInfoVo);
+    }
+
+    @ApiOperation("修改课程基本信息")
+    @PostMapping("updateCourseInfo")
+    public R updateCourseInfo(@RequestBody CourseInfoVo courseInfoVo){
+        courseService.updateCourseInfo(courseInfoVo);
+        return R.ok();
+    }
+
+    @ApiOperation("根据课程id查询课程确认信息")
+    @GetMapping("getPublishCourseInfo/{id}")
+    public R getPublishCourseInfo(@PathVariable("id") String courseId){
+        CoursePublishVo coursePublishVo = courseService.publishCourseInfo(courseId);
+        return R.ok().data("coursePublish",coursePublishVo);
     }
 }
 

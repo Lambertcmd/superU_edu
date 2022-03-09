@@ -32,6 +32,8 @@ mybatis-plus:
     db-config:
       logic-delete-value: 1
       logic-not-delete-value: 0
+  mapper-locations: classpath:com/geek/eduservice/mapper/xml/*.xml
+
 #  global-config:
 #    db-config:
 #      logic-delete-value: 1

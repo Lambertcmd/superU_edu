@@ -19,14 +19,17 @@ import java.math.BigDecimal;
 public class CourseInfoVo implements Serializable {
     public static final long serialVersionUID = 1L;
 
-//    @ApiModelProperty(value = "课程ID")
-//    private String id;
+    @ApiModelProperty(value = "课程ID")
+    private String id;
 
     @ApiModelProperty(value = "课程讲师ID")
     private String teacherId;
 
     @ApiModelProperty(value = "课程专业ID")
     private String subjectId;
+
+    @ApiModelProperty("课程一级分类ID")
+    private String subjectParentId;
 
     @ApiModelProperty(value = "课程标题")
     private String title;
