@@ -2,6 +2,7 @@ package com.geek.eduservice.controller;
 
 
 import com.geek.commonutils.R;
+import com.geek.eduservice.entity.EduCourse;
 import com.geek.eduservice.entity.vo.CourseInfoVo;
 import com.geek.eduservice.entity.vo.CoursePublishVo;
 import com.geek.eduservice.service.EduCourseService;
@@ -10,6 +11,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -27,6 +30,20 @@ public class EduCourseController {
 
     @Autowired
     private EduCourseService courseService;
+
+    @ApiOperation("课程列表")
+    @GetMapping
+    public R getCourseList(){
+        List<EduCourse> list = courseService.list();
+        return R.ok().data("list",list);
+    }
+
+    @ApiOperation("删除课程")
+    @DeleteMapping("{id}")
+    public R deleteCourse(@PathVariable("id") String courseId){
+        courseService.removeCourse(courseId);
+        return R.ok();
+    }
 
     @ApiOperation("添加课程基本信息")
     @PostMapping("/addCourseInfo")
@@ -60,6 +77,13 @@ public class EduCourseController {
     public R getPublishCourseInfo(@PathVariable("id") String courseId){
         CoursePublishVo coursePublishVo = courseService.publishCourseInfo(courseId);
         return R.ok().data("coursePublish",coursePublishVo);
+    }
+
+    @ApiOperation("课程最终发布")
+    @PostMapping("publishCourse/{id}")
+    public R publishCourse(@PathVariable("id")String courseId){
+        courseService.publishCourse(courseId);
+        return R.ok();
     }
 }
 

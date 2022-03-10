@@ -2,12 +2,15 @@ package com.geek.eduservice.service.impl;
 
 import com.geek.eduservice.entity.EduCourse;
 import com.geek.eduservice.entity.EduCourseDescription;
+import com.geek.eduservice.entity.EduVideo;
 import com.geek.eduservice.entity.vo.CourseInfoVo;
 import com.geek.eduservice.entity.vo.CoursePublishVo;
 import com.geek.eduservice.mapper.EduCourseMapper;
+import com.geek.eduservice.service.EduChapterService;
 import com.geek.eduservice.service.EduCourseDescriptionService;
 import com.geek.eduservice.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.geek.eduservice.service.EduVideoService;
 import com.geek.servicebase.exception.GuliException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,14 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     @Autowired
     private EduCourseDescriptionService courseDescriptionService;
+
+    @Autowired
+    private EduVideoService videoService;
+
+    @Autowired
+    private EduChapterService eduChapterService;
+
+
 
     @Override
     public String saveCourseInfo(CourseInfoVo courseInfoVo) {
@@ -80,5 +91,26 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         //调用mapper查询数据库
         CoursePublishVo publishCourseInfo = baseMapper.getPublishCourseInfo(courseId);
         return publishCourseInfo;
+    }
+
+    @Override
+    public void publishCourse(String courseId) {
+        EduCourse eduCourse = baseMapper.selectById(courseId);
+        eduCourse.setStatus(EduCourse.COURSE_NORMAL);
+        int isSuccess = baseMapper.updateById(eduCourse);
+        if (isSuccess == 0) {
+            throw new GuliException(20001, "课程发布失败");
+        }
+    }
+
+    @Override
+    public void removeCourse(String courseId) {
+        //1.根据课程id删除小节
+//        videoService.remove()
+        //2.根据课程id删除章节
+
+        //3.根据课程id删除描述
+
+        //4.根据课程id删除课程
     }
 }

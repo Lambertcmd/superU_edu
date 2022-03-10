@@ -28,6 +28,9 @@ public class EduCourse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public static final String COURSE_DRAFT = "Draft";//课程状态：未发布
+    public static final String COURSE_NORMAL = "Normal";//课程状态：已发布
+
     @ApiModelProperty("课程ID")
     private String id;
 
