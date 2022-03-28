@@ -1,9 +1,12 @@
 package com.geek.eduservice.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.geek.commonutils.R;
 import com.geek.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.geek.eduservice.entity.vo.CourseInfoVo;
 import com.geek.eduservice.entity.vo.CoursePublishVo;
+import com.geek.eduservice.entity.vo.CourseQuery;
 
 /**
  * <p>
@@ -31,5 +34,7 @@ public interface EduCourseService extends IService<EduCourse> {
     void publishCourse(String courseId);
 
     //删除课程
-    void removeCourse(String courseId);
+    void removeCourseById(String courseId);
+
+    void pageQuery(Page<EduCourse> coursePage, CourseQuery courseQuery);
 }

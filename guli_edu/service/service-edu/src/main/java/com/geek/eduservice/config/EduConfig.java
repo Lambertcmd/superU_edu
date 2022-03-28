@@ -32,5 +32,4 @@ public class EduConfig {
         return mybatisPlusInterceptor;
     }
 
-
 }

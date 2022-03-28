@@ -63,31 +63,31 @@ public class EduTeacherController {
         return flag ? R.ok() : R.error();
     }
 
-    /**
-     * 分页查询讲师
-     * @param page      当前页
-     * @param size      每页大小
-     * @return
-     */
-    @ApiOperation("根据页码和页大小分页查询讲师")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "page",value = "当前页"),
-            @ApiImplicitParam(name = "size",value = "每页大小")
-    })
-    @GetMapping("/pageTeacher/{page}/{size}")
-    public R pageListTeacher(@PathVariable("page") long page,
-                             @PathVariable("size") long size){
-        Page<EduTeacher> pageInit = new Page<>(page,size);
-//        int i = 10/0;
-//        try {
-//            int i = 10/0;
-//        }catch (Exception e){
-//            throw new GuliException(20001,"执行了自定义异常处理");
-//        }
-
-        Page<EduTeacher> teacherPage = teacherService.page(pageInit);
-        return R.ok().data("total",teacherPage.getTotal()).data("rows",teacherPage.getRecords());
-    }
+//    /**
+//     * 分页查询所有讲师
+//     * @param page      当前页
+//     * @param size      每页大小
+//     * @return
+//     */
+//    @ApiOperation("根据页码和页大小分页查询讲师")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "page",value = "当前页"),
+//            @ApiImplicitParam(name = "size",value = "每页大小")
+//    })
+//    @GetMapping("/pageTeacher/{page}/{size}")
+//    public R pageListTeacher(@PathVariable("page") long page,
+//                             @PathVariable("size") long size){
+//        Page<EduTeacher> pageInit = new Page<>(page,size);
+////        int i = 10/0;
+////        try {
+////            int i = 10/0;
+////        }catch (Exception e){
+////            throw new GuliException(20001,"执行了自定义异常处理");
+////        }
+//
+//        Page<EduTeacher> teacherPage = teacherService.page(pageInit);
+//        return R.ok().data("total",teacherPage.getTotal()).data("rows",teacherPage.getRecords());
+//    }
 
     /**
      * 分页复杂查询讲师

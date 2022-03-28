@@ -1,5 +1,6 @@
 package com.geek.eduservice.service;
 
+import com.geek.commonutils.R;
 import com.geek.eduservice.entity.EduVideo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduVideoService extends IService<EduVideo> {
 
+    /**
+     * 根据课程id删除该课程的所有小节
+     * @param courseId
+     */
+    void removeVideoByCourseId(String courseId);
+
+    R deleteVideo(String id);
 }

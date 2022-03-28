@@ -1,4 +1,4 @@
-package com.geek.servicebase;
+package com.geek.servicebase.config;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

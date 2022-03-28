@@ -1,5 +1,6 @@
 package com.geek.eduservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.geek.eduservice.entity.EduCourseDescription;
 import com.geek.eduservice.mapper.EduCourseDescriptionMapper;
 import com.geek.eduservice.service.EduCourseDescriptionService;
@@ -16,5 +17,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EduCourseDescriptionServiceImpl extends ServiceImpl<EduCourseDescriptionMapper, EduCourseDescription> implements EduCourseDescriptionService {
+
 
 }

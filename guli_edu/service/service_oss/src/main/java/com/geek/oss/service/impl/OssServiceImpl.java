@@ -3,12 +3,12 @@ package com.geek.oss.service.impl;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.geek.oss.service.OssService;
-import com.geek.oss.utils.ConstantPropertiesUtil;
+import com.geek.oss.utils.ConstantOssPropertiesUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.UUID;
 
@@ -19,15 +19,17 @@ import java.util.UUID;
  * @Date 2022/1/5 14:57
  * @Version 1.0
  **/
+@Slf4j
 @Service
 public class OssServiceImpl implements OssService {
 
 
     public String uploadFileAvatar(MultipartFile file) {
-        String endpoint = ConstantPropertiesUtil.END_POINT;
-        String accessKeyId = ConstantPropertiesUtil.ACCESS_KEY_ID;
-        String accessKeySecret = ConstantPropertiesUtil.ACCESS_KEY_SECRET;
-        String bucketName = ConstantPropertiesUtil.BUCKET_NAME;
+        String endpoint = ConstantOssPropertiesUtil.END_POINT;
+        String accessKeyId = ConstantOssPropertiesUtil.ACCESS_KEY_ID;
+        String accessKeySecret = ConstantOssPropertiesUtil.ACCESS_KEY_SECRET;
+        String bucketName = ConstantOssPropertiesUtil.BUCKET_NAME;
+        log.info("endpoint:"+endpoint);
 
         try {
             // 1.创建OSSClient实例

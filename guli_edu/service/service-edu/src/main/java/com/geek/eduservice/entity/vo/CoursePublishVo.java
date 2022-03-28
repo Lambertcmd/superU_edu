@@ -1,5 +1,6 @@
 package com.geek.eduservice.entity.vo;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * @Version 1.0
  **/
 @Data
+@ApiModel(value = "CoursePublishVo",description = "课程确认信息对象")
 public class CoursePublishVo implements Serializable {
     public static final long serialVersionUID = 1L;
 

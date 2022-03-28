@@ -12,7 +12,7 @@ import lombok.Data;
  * @Version 1.0
  **/
 @Data
-@ApiModel(value = "Teacher复杂查询vo",description = "讲师复杂查询对象封装")
+@ApiModel(value = "Teacher复杂查询vo",description = "讲师复杂查询条件对象封装")
 public class TeacherQuery  {
 
     @ApiModelProperty(value = "讲师名称")
