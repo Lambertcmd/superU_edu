@@ -11,7 +11,12 @@ import com.geek.eduservice.service.EduTeacherService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 //import org.apache.commons.lang3.StringUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.hash.HashMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -51,5 +56,32 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         queryWrapper.orderByDesc("gmt_create");
         Page<EduTeacher> page = baseMapper.selectPage(teacherPage, queryWrapper);
         log.info("page,{}",page.getRecords());
+    }
+
+    @Override
+    public Map<String, Object> getTeacherFrontList(Page<EduTeacher> pageTeacher) {
+        QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
+        wrapper.orderByAsc("sort");
+        //把分页数据封装到pageTeacher对象
+        baseMapper.selectPage(pageTeacher, wrapper);
+        //将分页数据取出来
+        List<EduTeacher> records = pageTeacher.getRecords();
+        long current = pageTeacher.getCurrent();
+        long pages = pageTeacher.getPages();
+        long size = pageTeacher.getSize();
+        long total = pageTeacher.getTotal();
+        boolean hasNext = pageTeacher.hasNext();//是否有下一页
+        boolean hasPrevious = pageTeacher.hasPrevious();//是否有上一页
+
+        //将分页数据取出来放到map集合
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("items", records);
+        map.put("current", current);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+        return map;
     }
 }

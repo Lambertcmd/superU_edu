@@ -43,6 +43,7 @@
             <artifactId>springfox-boot-starter</artifactId>
             <scope>provided </scope>
         </dependency>
+
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>

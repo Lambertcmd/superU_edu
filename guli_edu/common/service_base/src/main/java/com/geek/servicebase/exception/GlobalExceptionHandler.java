@@ -1,9 +1,11 @@
 package com.geek.servicebase.exception;
 
 import com.geek.commonutils.R;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * @ClassName GlobalExceptionHandler
@@ -43,6 +45,7 @@ public class GlobalExceptionHandler {
     public R error(GuliException e){
         e.printStackTrace();
         return R.error().code(e.getCode()).message(e.getMsg());
+
     }
 
 }

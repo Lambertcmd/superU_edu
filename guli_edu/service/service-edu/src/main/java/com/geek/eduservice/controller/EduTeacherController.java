@@ -59,8 +59,9 @@ public class EduTeacherController {
     @ApiImplicitParam(name = "id",value = "讲师id")
     @DeleteMapping("/{id}")
     public R removeTeacherById(@PathVariable("id") String id){
-        boolean flag = teacherService.removeById(id);
-        return flag ? R.ok() : R.error();
+        return R.error();
+//        boolean flag = teacherService.removeById(id);
+//        return flag ? R.ok() : R.error();
     }
 
 //    /**

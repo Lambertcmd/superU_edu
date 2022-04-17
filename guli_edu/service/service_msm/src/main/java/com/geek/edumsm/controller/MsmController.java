@@ -1,9 +1,9 @@
 package com.geek.edumsm.controller;
 
 import com.geek.commonutils.R;
+import com.geek.commonutils.RedisUtils;
 import com.geek.edumsm.service.MsmService;
 import com.geek.edumsm.utils.RandomUtil;
-import com.geek.edumsm.utils.RedisUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -11,8 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**

@@ -28,6 +28,8 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         log.info("start insert fill....");
         this.setFieldValByName("gmtCreate",new Date(),metaObject);
         this.setFieldValByName("gmtModified",new Date(),metaObject);
+        this.setFieldValByName("isDisabled",false,metaObject);//账户是否禁用
+        this.setFieldValByName("isDeleted", false,metaObject);//逻辑删除
 
     }
     /**

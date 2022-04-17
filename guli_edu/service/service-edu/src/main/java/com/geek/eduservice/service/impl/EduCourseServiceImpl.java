@@ -7,6 +7,7 @@ import com.geek.commonutils.R;
 import com.geek.eduservice.entity.EduCourse;
 import com.geek.eduservice.entity.EduCourseDescription;
 import com.geek.eduservice.entity.EduVideo;
+import com.geek.eduservice.entity.frontvo.CourseQueryFrontVo;
 import com.geek.eduservice.entity.vo.CourseInfoVo;
 import com.geek.eduservice.entity.vo.CoursePublishVo;
 import com.geek.eduservice.entity.vo.CourseQuery;
@@ -20,6 +21,10 @@ import com.geek.servicebase.exception.GuliException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -148,5 +153,57 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         //时间降序排序(最新添加的排最前)
         wrapper.orderByDesc("gmt_create");
         Page<EduCourse> page = baseMapper.selectPage(coursePage, wrapper);
+    }
+
+    @Override
+    public List<EduCourse> getByTeacherId(String id) {
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        wrapper.eq("teacher_id", id);
+        wrapper.orderByDesc("gmt_modified");
+        List<EduCourse> courseList = baseMapper.selectList(wrapper);
+        return courseList;
+    }
+
+    @Override
+    public Map<String, Object> getCourseListPage(Page<EduCourse> coursePage, CourseQueryFrontVo courseQueryVo) {
+        QueryWrapper<EduCourse> queryWrapper = new QueryWrapper<>();
+        //查询条件
+        if (StringUtils.isNotBlank(courseQueryVo.getSubjectParentId())){//一级分类
+            queryWrapper.eq("subject_parent_id", courseQueryVo.getSubjectParentId());
+        }
+        if (StringUtils.isNotBlank(courseQueryVo.getSubjectId())){//二级分类
+            queryWrapper.eq("subject_id", courseQueryVo.getSubjectId());
+        }
+        if (StringUtils.isNotBlank(courseQueryVo.getBuyCountSort())){//关注度/购买量降序
+            queryWrapper.orderByDesc("buy_count");
+        }
+        if (StringUtils.isNotBlank(courseQueryVo.getGmtCreateSort())){//最新课程
+            queryWrapper.orderByDesc("gmt_create");
+        }
+        if (StringUtils.isNotBlank(courseQueryVo.getPriceSort())){//价格降序
+            queryWrapper.orderByDesc("price");
+        }
+
+        baseMapper.selectPage(coursePage, queryWrapper);
+
+        long total = coursePage.getTotal(); //课程总数量
+        long size = coursePage.getSize();   //每页课程数量
+        long current = coursePage.getCurrent();//当前页
+        List<EduCourse> records = coursePage.getRecords();//当前页内容
+        boolean hasNext = coursePage.hasNext();//是否有下一页
+        boolean hasPrevious = coursePage.hasPrevious();//是否有上一页
+
+        HashMap<String, Object> map = new HashMap<>();
+
+        map.put("total", total);
+        map.put("size", size);
+        map.put("current", current);
+        map.put("records", records);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+
+        return map;
+
+
     }
 }

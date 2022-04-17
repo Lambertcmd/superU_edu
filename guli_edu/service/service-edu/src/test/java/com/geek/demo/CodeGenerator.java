@@ -20,7 +20,7 @@ import java.util.Collections;
 public class CodeGenerator {
     static final String URL = "jdbc:mysql://localhost:3306/guli_edu?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=true";
     public static void main(String[] args) {
-        String projectPath = "D:\\guli_edu\\guli_edu\\service\\service_cms";//获取项目路径
+        String projectPath = "D:\\guli_edu\\guli_edu\\service\\service-ucenter";//获取项目路径
         FastAutoGenerator.create(URL, "root", "123456")
                 //全局配置
                 .globalConfig(builder -> {
@@ -34,7 +34,7 @@ public class CodeGenerator {
                 //包名配置
                 .packageConfig(builder -> {
                     builder.parent("com.geek")
-                            .moduleName("educms")
+                            .moduleName("educenter")
                             .service("service")
                             .serviceImpl("service.impl")
                             .controller("controller")
@@ -45,7 +45,7 @@ public class CodeGenerator {
                 })
                 //策略配置
                 .strategyConfig(builder -> {
-                    builder.addInclude("crm_banner")
+                    builder.addInclude("ucenter_member") //数据库表名 作为每个文件名开头
 //                            .addTablePrefix("eduservice_")//表前缀
                             .serviceBuilder().formatServiceFileName("%sService")//去掉Service的 "I" 前缀
                             .controllerBuilder().enableRestStyle()//restful开启,url中驼峰转连字符

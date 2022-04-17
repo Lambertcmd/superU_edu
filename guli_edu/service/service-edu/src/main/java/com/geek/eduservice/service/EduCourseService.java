@@ -4,9 +4,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.geek.commonutils.R;
 import com.geek.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.geek.eduservice.entity.frontvo.CourseQueryFrontVo;
 import com.geek.eduservice.entity.vo.CourseInfoVo;
 import com.geek.eduservice.entity.vo.CoursePublishVo;
 import com.geek.eduservice.entity.vo.CourseQuery;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -37,4 +41,8 @@ public interface EduCourseService extends IService<EduCourse> {
     void removeCourseById(String courseId);
 
     void pageQuery(Page<EduCourse> coursePage, CourseQuery courseQuery);
+
+    List<EduCourse> getByTeacherId(String id);
+
+    Map<String,Object> getCourseListPage(Page<EduCourse> coursePage, CourseQueryFrontVo courseQueryVo);
 }

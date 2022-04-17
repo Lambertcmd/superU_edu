@@ -1,4 +1,4 @@
-package com.geek.eduservice.controller;
+package com.geek.eduservice.controller.front;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.geek.commonutils.R;
@@ -10,10 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,8 +21,8 @@ import java.util.List;
  * @Date 2022/3/24 12:15
  * @Version 1.0
  **/
-@Api(tags = "前台前端控制器")
-@CrossOrigin
+@Api(tags = "前台主页前端控制器")
+@CrossOrigin(origins = "*",allowCredentials="true")
 @RestController
 @RequestMapping("/eduservice/index")
 public class IndexController {
