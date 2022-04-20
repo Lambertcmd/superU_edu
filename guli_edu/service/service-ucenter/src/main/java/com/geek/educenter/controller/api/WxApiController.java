@@ -1,7 +1,6 @@
 package com.geek.educenter.controller.api;
 
-import com.geek.commonutils.JwtUtils;
-import com.geek.commonutils.R;
+import com.geek.commonutils.jwt.JwtUtils;
 import com.geek.educenter.entity.UcenterMember;
 import com.geek.educenter.service.UcenterMemberService;
 import com.geek.educenter.utils.ConstantWxUtils;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URLEncoder;
 import java.util.HashMap;

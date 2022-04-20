@@ -1,6 +1,6 @@
 package com.geek.eduservice.controller;
 
-import com.geek.commonutils.R;
+import com.geek.commonutils.result.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.geek.commonutils;
+package com.geek.commonutils.redis;
 
 
 import com.google.common.collect.Lists;

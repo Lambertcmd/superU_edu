@@ -2,7 +2,7 @@ package com.geek.educms.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.geek.commonutils.R;
+import com.geek.commonutils.result.R;
 import com.geek.educms.entity.Banner;
 import com.geek.educms.service.BannerService;
 import io.swagger.annotations.Api;
@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.weaver.patterns.IfPointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

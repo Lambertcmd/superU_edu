@@ -1,10 +1,8 @@
 package com.geek.eduservice.controller;
 
 
-import com.geek.commonutils.R;
-import com.geek.eduservice.entity.EduSubject;
-import com.geek.eduservice.entity.category.TopCategory;
-import com.geek.eduservice.mapper.EduSubjectMapper;
+import com.geek.commonutils.result.R;
+import com.geek.eduservice.entity.dto.TopCategoryDTO;
 import com.geek.eduservice.service.EduSubjectService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -50,7 +48,7 @@ public class EduSubjectController {
     @ApiOperation("课程分类列表")
     @GetMapping("/getAllSubject")
     public R getAllSubject(){
-        List<TopCategory> list = subjectService.getAllSubject();
+        List<TopCategoryDTO> list = subjectService.getAllSubject();
         return R.ok().data("list",list);
     }
 

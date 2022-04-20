@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.geek.eduservice.entity.EduChapter;
 import com.geek.eduservice.entity.EduVideo;
-import com.geek.eduservice.entity.chapter.ChapterVo;
-import com.geek.eduservice.entity.chapter.VideoVo;
+import com.geek.eduservice.entity.dto.ChapterDTO;
+import com.geek.eduservice.entity.dto.VideoDTO;
 import com.geek.eduservice.mapper.EduChapterMapper;
 import com.geek.eduservice.service.EduChapterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -33,7 +33,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
     private EduVideoService videoService;
 
     @Override
-    public List<ChapterVo> getChapterVideoByCourseId(String courseId) {
+    public List<ChapterDTO> getChapterVideoByCourseId(String courseId) {
         //1.根据课程id查询所有章节
         QueryWrapper<EduChapter> wrapperChapter = new QueryWrapper<>();
         wrapperChapter.eq("course_id", courseId);
@@ -44,16 +44,16 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         wrapperVideo.eq("course_id", courseId);
         List<EduVideo> videoList = videoService.list(wrapperVideo);
 
-        List<ChapterVo> finalList = new ArrayList<>();
+        List<ChapterDTO> finalList = new ArrayList<>();
         //3.遍历所有章节list集合进行封装
         chapterList.forEach(chapter -> {
-            ChapterVo chapterVo = new ChapterVo();
+            ChapterDTO chapterVo = new ChapterDTO();
             BeanUtils.copyProperties(chapter, chapterVo);
             //4.遍历所有小节list集合进行封装
-            List<VideoVo> videoVoList = new ArrayList<>();
+            List<VideoDTO> videoVoList = new ArrayList<>();
             videoList.forEach(video -> {
                 if(StringUtils.equals(video.getChapterId(), chapterVo.getId())){
-                    VideoVo videoVo = new VideoVo();
+                    VideoDTO videoVo = new VideoDTO();
                     BeanUtils.copyProperties(video, videoVo);
                     videoVoList.add(videoVo);
                 }

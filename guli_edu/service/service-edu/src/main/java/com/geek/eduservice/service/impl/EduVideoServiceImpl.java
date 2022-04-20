@@ -2,7 +2,7 @@ package com.geek.eduservice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.geek.commonutils.R;
+import com.geek.commonutils.result.R;
 import com.geek.eduservice.client.VodClient;
 import com.geek.eduservice.entity.EduVideo;
 import com.geek.eduservice.mapper.EduVideoMapper;
@@ -12,7 +12,6 @@ import com.geek.servicebase.exception.GuliException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

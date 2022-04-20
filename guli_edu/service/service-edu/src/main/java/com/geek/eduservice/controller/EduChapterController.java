@@ -1,11 +1,10 @@
 package com.geek.eduservice.controller;
 
 
-import com.geek.commonutils.R;
+import com.geek.commonutils.result.R;
 import com.geek.eduservice.entity.EduChapter;
-import com.geek.eduservice.entity.chapter.ChapterVo;
+import com.geek.eduservice.entity.dto.ChapterDTO;
 import com.geek.eduservice.service.EduChapterService;
-import com.geek.servicebase.exception.GuliException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -44,7 +43,7 @@ public class EduChapterController {
     @ApiImplicitParam(name = "courseId", value = "课程id")
     @GetMapping("getChapterVideo/{courseId}")
     public R getChapterVideo(@PathVariable("courseId") String courseId) {
-        List<ChapterVo> list = chapterService.getChapterVideoByCourseId(courseId);
+        List<ChapterDTO> list = chapterService.getChapterVideoByCourseId(courseId);
         return R.ok().data("chapterVideoList", list);
     }
 
@@ -57,6 +56,7 @@ public class EduChapterController {
     @ApiOperation("添加章节")
     @PostMapping("/addChapter")
     public R addChapter(@RequestBody EduChapter eduChapter) {
+        log.info("添加章节："+eduChapter.getTitle());
         boolean result = chapterService.save(eduChapter);
         if (!result) {
             return R.error().message("添加章节出错");

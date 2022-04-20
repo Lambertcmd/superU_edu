@@ -2,6 +2,7 @@ package com.geek.eduservice.mapper;
 
 import com.geek.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.geek.eduservice.entity.frontdto.CourseInfoDTO;
 import com.geek.eduservice.entity.vo.CoursePublishVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,11 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
     public CoursePublishVo getPublishCourseInfo(String courseId);
+
+    /**
+     * 根据课程id查询课程详情页信息
+     * @param courseId
+     * @return
+     */
+    CourseInfoDTO getBaseCourseInfo(String courseId);
 }

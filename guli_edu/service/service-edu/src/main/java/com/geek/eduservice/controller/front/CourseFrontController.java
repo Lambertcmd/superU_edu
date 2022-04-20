@@ -1,9 +1,12 @@
 package com.geek.eduservice.controller.front;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.geek.commonutils.R;
+import com.geek.commonutils.result.R;
 import com.geek.eduservice.entity.EduCourse;
+import com.geek.eduservice.entity.dto.ChapterDTO;
+import com.geek.eduservice.entity.frontdto.CourseInfoDTO;
 import com.geek.eduservice.entity.frontvo.CourseQueryFrontVo;
+import com.geek.eduservice.service.EduChapterService;
 import com.geek.eduservice.service.EduCourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -13,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,11 +29,13 @@ import java.util.Map;
 @RestController
 @Slf4j
 @CrossOrigin
-@Api("前台课程模块接口")
+@Api(tags = "前台课程模块接口")
 @RequestMapping("/eduservice/coursefront")
 public class CourseFrontController {
     @Autowired
     private EduCourseService courseService;
+    @Autowired
+    private EduChapterService chapterService;
 
     @ApiOperation("分页复杂查询课程列表")
     @ApiImplicitParams({
@@ -45,4 +51,16 @@ public class CourseFrontController {
         Map<String, Object> map = courseService.getCourseListPage(coursePage, courseQueryVo);
         return R.ok().data(map);
     }
+
+    @ApiOperation("根据课程id查询课程详情页")
+    @GetMapping("getFrontCourseInfo/{courseId}")
+    public R getFrontCourseInfo(@PathVariable("courseId") String courseId){
+        //根据课程id 多表查询sql语句查询信息
+        CourseInfoDTO courseInfoDTO = courseService.getBaseCourseInfo(courseId);
+
+        //根据课程id查询课程大纲(章节和小节)
+        List<ChapterDTO> chapterVoList = chapterService.getChapterVideoByCourseId(courseId);
+        return R.ok().data("courseInfoDTO", courseInfoDTO).data("chapterVoList",chapterVoList);
+    }
+
 }

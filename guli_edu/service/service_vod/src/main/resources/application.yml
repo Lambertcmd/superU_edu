@@ -17,7 +17,6 @@ spring:
       discovery:
         server-addr: localhost:8848 #配置nacos服务地址
 
-
 #阿里云
 aliyun:
   vod:

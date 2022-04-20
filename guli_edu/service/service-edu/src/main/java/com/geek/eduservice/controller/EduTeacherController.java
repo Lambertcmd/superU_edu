@@ -1,24 +1,19 @@
 package com.geek.eduservice.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.geek.commonutils.R;
+import com.geek.commonutils.result.R;
 import com.geek.eduservice.entity.EduTeacher;
 import com.geek.eduservice.entity.vo.TeacherQuery;
 import com.geek.eduservice.service.EduTeacherService;
-import com.geek.servicebase.exception.GuliException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -59,9 +54,8 @@ public class EduTeacherController {
     @ApiImplicitParam(name = "id",value = "讲师id")
     @DeleteMapping("/{id}")
     public R removeTeacherById(@PathVariable("id") String id){
-        return R.error();
-//        boolean flag = teacherService.removeById(id);
-//        return flag ? R.ok() : R.error();
+        boolean flag = teacherService.removeById(id);
+        return flag ? R.ok() : R.error();
     }
 
 //    /**

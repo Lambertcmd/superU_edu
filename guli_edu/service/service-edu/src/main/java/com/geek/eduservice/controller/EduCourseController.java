@@ -2,13 +2,11 @@ package com.geek.eduservice.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.geek.commonutils.R;
+import com.geek.commonutils.result.R;
 import com.geek.eduservice.entity.EduCourse;
-import com.geek.eduservice.entity.EduTeacher;
 import com.geek.eduservice.entity.vo.CourseInfoVo;
 import com.geek.eduservice.entity.vo.CoursePublishVo;
 import com.geek.eduservice.entity.vo.CourseQuery;
-import com.geek.eduservice.entity.vo.TeacherQuery;
 import com.geek.eduservice.service.EduCourseService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;

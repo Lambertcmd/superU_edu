@@ -1,7 +1,7 @@
 package com.geek.eduservice.controller.front;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.geek.commonutils.R;
+import com.geek.commonutils.result.R;
 import com.geek.eduservice.entity.EduCourse;
 import com.geek.eduservice.entity.EduTeacher;
 import com.geek.eduservice.service.EduCourseService;

@@ -1,11 +1,9 @@
 package com.geek.servicebase.exception;
 
-import com.geek.commonutils.R;
-import org.springframework.http.HttpStatus;
+import com.geek.commonutils.result.R;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * @ClassName GlobalExceptionHandler

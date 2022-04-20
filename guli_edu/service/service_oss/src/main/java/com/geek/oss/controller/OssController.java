@@ -1,6 +1,6 @@
 package com.geek.oss.controller;
 
-import com.geek.commonutils.R;
+import com.geek.commonutils.result.R;
 import com.geek.oss.service.OssService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -37,6 +37,7 @@ public class OssController {
         log.info("用户上传头像");
         //获取上传的文件 MultipartFile并返回上传到oss的路径
         String url = ossService.uploadFileAvatar(file);
+        log.info("头像上传成功！");
         return R.ok().data("url",url);
     }
 }

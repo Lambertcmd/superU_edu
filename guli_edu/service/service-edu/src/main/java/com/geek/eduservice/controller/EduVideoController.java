@@ -1,8 +1,7 @@
 package com.geek.eduservice.controller;
 
 
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.geek.commonutils.R;
+import com.geek.commonutils.result.R;
 import com.geek.eduservice.client.VodClient;
 import com.geek.eduservice.entity.EduVideo;
 import com.geek.eduservice.service.EduVideoService;
@@ -29,9 +28,6 @@ import org.springframework.web.bind.annotation.*;
 public class EduVideoController {
     @Autowired
     private EduVideoService videoService;
-
-    @Autowired
-    private VodClient vodClient;
 
     @ApiOperation("添加小节")
     @PostMapping("/addVideo")

@@ -7,7 +7,9 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoResponse;
-import com.geek.commonutils.R;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
+import com.geek.commonutils.result.R;
 import com.geek.servicebase.exception.GuliException;
 import com.geek.vod.service.VodService;
 import com.geek.vod.utils.ConstantVodPropertiesUtil;
@@ -19,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,7 +64,6 @@ public class VodServiceImpl implements VodService {
                 System.out.print("ErrorCode=" + response.getCode() + "\n");
                 System.out.print("ErrorMessage=" + response.getMessage() + "\n");
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -111,6 +111,25 @@ public class VodServiceImpl implements VodService {
             e.printStackTrace();
             throw new GuliException(20001, "批量删除视频失败");
         }
+    }
+
+    @Override
+    public String getPlayAuth(String videoId) throws ClientException {
+        //获取阿里云存储相关常量
+        String accessKeyId = ConstantVodPropertiesUtil.ACCESS_KEY_ID;
+        String accessKeySecret = ConstantVodPropertiesUtil.ACCESS_KEY_SECRET;
+        //初始化
+        DefaultAcsClient client = InitVodClient.initVodClient(accessKeyId, accessKeySecret);
+        //请求
+        GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+        request.setVideoId(videoId);
+        //响应
+        GetVideoPlayAuthResponse response = client.getAcsResponse(request);
+        //获得播放凭证
+        String playAuth = response.getPlayAuth();
+
+        //返回结果
+        return playAuth;
     }
 
 }

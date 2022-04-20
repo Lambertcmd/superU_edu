@@ -1,7 +1,6 @@
 package com.geek.eduservice.client;
 
-import com.geek.commonutils.R;
-import com.geek.eduservice.entity.EduVideo;
+import com.geek.commonutils.result.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;

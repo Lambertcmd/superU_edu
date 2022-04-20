@@ -12,4 +12,29 @@
                            LEFT JOIN edu_subject es2 ON ec.subject_id=es2.id
         WHERE ec.id = #{courseId}
     </select>
+    <!--  根据课程id查询课程详情页信息  -->
+    <select id="getBaseCourseInfo" resultType="com.geek.eduservice.entity.frontdto.CourseInfoDTO">
+        SELECT c.id,
+               c.title,
+               c.price,
+               c.lesson_num AS lessonNum,
+               c.cover,
+               c.buy_count AS buyCount,
+               c.view_count AS viewCount,
+               cd.description,
+               t.id AS teacherId,
+               t.name AS teacherName,
+               t.intro,
+               t.avatar,
+               s1.id AS subjectLevelOneId,
+               s1.title AS subjectLevelOne,
+               s2.id AS subjectLevelTwoId,
+               s2.title AS subjectLevelTwo
+        FROM edu_course c
+                 left join edu_course_description cd on c.id = cd.id
+                 left join edu_teacher t on c.teacher_id = t.id
+                 left join edu_subject s1 on c.subject_parent_id = s1.id
+                 left join edu_subject s2 on c.subject_id = s2.id
+        WHERE c.id = #{courseId}
+    </select>
 </mapper>

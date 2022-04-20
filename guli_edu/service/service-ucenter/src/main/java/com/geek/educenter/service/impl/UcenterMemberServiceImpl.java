@@ -2,9 +2,9 @@ package com.geek.educenter.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.geek.commonutils.JwtUtils;
-import com.geek.commonutils.MD5;
-import com.geek.commonutils.RedisUtils;
+import com.geek.commonutils.jwt.JwtUtils;
+import com.geek.commonutils.utils.MD5;
+import com.geek.commonutils.redis.RedisUtils;
 import com.geek.educenter.entity.UcenterMember;
 import com.geek.educenter.entity.vo.LoginVo;
 import com.geek.educenter.entity.vo.RegisterVo;
@@ -54,7 +54,7 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         }
 
         //判断用户是否禁用
-        if (mobileMember.getIsDisabled()){
+        if (mobileMember.getIsDisabled() == 1){
             throw new GuliException(20001, "用户被禁用");
         }
 

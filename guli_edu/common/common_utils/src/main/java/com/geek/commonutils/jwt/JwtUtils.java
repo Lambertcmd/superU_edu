@@ -1,4 +1,4 @@
-package com.geek.commonutils;
+package com.geek.commonutils.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

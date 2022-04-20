@@ -1,4 +1,4 @@
-package com.geek.commonutils;
+package com.geek.commonutils.result;
 
 
 import lombok.Getter;

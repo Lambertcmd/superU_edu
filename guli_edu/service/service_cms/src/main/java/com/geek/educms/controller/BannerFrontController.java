@@ -1,6 +1,6 @@
 package com.geek.educms.controller;
 
-import com.geek.commonutils.R;
+import com.geek.commonutils.result.R;
 import com.geek.educms.entity.Banner;
 import com.geek.educms.service.BannerService;
 import io.swagger.annotations.Api;

@@ -1,6 +1,6 @@
 package com.geek.eduservice.client;
 
-import com.geek.commonutils.R;
+import com.geek.commonutils.result.R;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

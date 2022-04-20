@@ -1,21 +1,24 @@
 package com.geek.educenter.controller;
 
 
-import com.geek.commonutils.JwtUtils;
-import com.geek.commonutils.R;
+import com.geek.commonutils.dto.CommentMemberInfo;
+import com.geek.commonutils.jwt.JwtUtils;
+import com.geek.commonutils.result.R;
 import com.geek.educenter.entity.UcenterMember;
 import com.geek.educenter.entity.vo.LoginVo;
 import com.geek.educenter.entity.vo.RegisterVo;
 import com.geek.educenter.service.UcenterMemberService;
+import com.geek.servicebase.exception.GuliException;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Optional;
 
 /**
  * <p>
@@ -59,6 +62,17 @@ public class UcenterMemberController {
         //根据用户id查询用户
         UcenterMember member = memberService.getById(memberId);
         return R.ok().data("userInfo",member);
+    }
+
+    @ApiOperation("根据用户id获取用户信息")
+    @GetMapping("getInfoById/{id}")
+    public CommentMemberInfo getInfoById(@PathVariable("id") String id){
+        UcenterMember member = Optional.ofNullable(memberService.getById(id))
+                .orElseThrow(() -> new GuliException(20001, "用户不存在"));
+        CommentMemberInfo commentMemberInfo = new CommentMemberInfo();
+        BeanUtils.copyProperties(member, commentMemberInfo);
+        commentMemberInfo.setMemberId(member.getId());
+        return commentMemberInfo;
     }
 }
 

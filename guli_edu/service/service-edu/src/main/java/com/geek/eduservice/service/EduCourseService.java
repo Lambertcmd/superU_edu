@@ -1,9 +1,9 @@
 package com.geek.eduservice.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.geek.commonutils.R;
 import com.geek.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.geek.eduservice.entity.frontdto.CourseInfoDTO;
 import com.geek.eduservice.entity.frontvo.CourseQueryFrontVo;
 import com.geek.eduservice.entity.vo.CourseInfoVo;
 import com.geek.eduservice.entity.vo.CoursePublishVo;
@@ -45,4 +45,13 @@ public interface EduCourseService extends IService<EduCourse> {
     List<EduCourse> getByTeacherId(String id);
 
     Map<String,Object> getCourseListPage(Page<EduCourse> coursePage, CourseQueryFrontVo courseQueryVo);
+
+    /**
+     * 根据课程id查询课程详情页信息
+     * @param courseId
+     * @return
+     */
+    CourseInfoDTO getBaseCourseInfo(String courseId);
+
+    void updateCourseViewCount(String courseId);
 }

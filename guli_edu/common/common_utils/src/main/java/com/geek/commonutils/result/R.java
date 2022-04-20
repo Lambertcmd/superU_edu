@@ -1,6 +1,5 @@
-package com.geek.commonutils;
+package com.geek.commonutils.result;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.geek.commonutils;
+package com.geek.commonutils.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -1,7 +1,7 @@
 package com.geek.edumsm.controller;
 
-import com.geek.commonutils.R;
-import com.geek.commonutils.RedisUtils;
+import com.geek.commonutils.result.R;
+import com.geek.commonutils.redis.RedisUtils;
 import com.geek.edumsm.service.MsmService;
 import com.geek.edumsm.utils.RandomUtil;
 import io.swagger.annotations.Api;

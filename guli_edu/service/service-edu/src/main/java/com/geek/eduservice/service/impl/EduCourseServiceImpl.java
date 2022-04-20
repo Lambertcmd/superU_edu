@@ -3,10 +3,9 @@ package com.geek.eduservice.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.geek.commonutils.R;
 import com.geek.eduservice.entity.EduCourse;
 import com.geek.eduservice.entity.EduCourseDescription;
-import com.geek.eduservice.entity.EduVideo;
+import com.geek.eduservice.entity.frontdto.CourseInfoDTO;
 import com.geek.eduservice.entity.frontvo.CourseQueryFrontVo;
 import com.geek.eduservice.entity.vo.CourseInfoVo;
 import com.geek.eduservice.entity.vo.CoursePublishVo;
@@ -191,6 +190,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         long current = coursePage.getCurrent();//当前页
         List<EduCourse> records = coursePage.getRecords();//当前页内容
         boolean hasNext = coursePage.hasNext();//是否有下一页
+        long pages = coursePage.getPages();//总页数
         boolean hasPrevious = coursePage.hasPrevious();//是否有上一页
 
         HashMap<String, Object> map = new HashMap<>();
@@ -199,11 +199,25 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         map.put("size", size);
         map.put("current", current);
         map.put("records", records);
+        map.put("pages", pages);
         map.put("hasNext", hasNext);
         map.put("hasPrevious", hasPrevious);
 
         return map;
 
 
+    }
+
+    @Override
+    public CourseInfoDTO getBaseCourseInfo(String courseId) {
+        return baseMapper.getBaseCourseInfo(courseId);
+    }
+
+    @Override
+    public void updateCourseViewCount(String courseId) {
+        EduCourse course = baseMapper.selectById(courseId);
+        //打开课程详情浏览量+1
+        course.setViewCount(course.getViewCount() + 1);
+        baseMapper.updateById(course);
     }
 }

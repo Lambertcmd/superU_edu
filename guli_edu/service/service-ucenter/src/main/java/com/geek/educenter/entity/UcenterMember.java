@@ -2,6 +2,7 @@ package com.geek.educenter.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
@@ -53,13 +54,12 @@ public class UcenterMember implements Serializable {
     @ApiModelProperty("用户签名")
     private String sign;
 
-    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty("是否禁用 1（true）已禁用，  0（false）未禁用")
-    private Boolean isDisabled;
+    private Integer isDisabled;
 
-    @TableField(fill = FieldFill.INSERT)
+    @TableLogic
     @ApiModelProperty("逻辑删除 1（true）已删除， 0（false）未删除")
-    private Boolean isDeleted;
+    private Integer isDeleted;
 
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty("创建时间")

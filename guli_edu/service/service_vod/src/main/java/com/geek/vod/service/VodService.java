@@ -1,6 +1,7 @@
 package com.geek.vod.service;
 
-import com.geek.commonutils.R;
+import com.aliyuncs.exceptions.ClientException;
+import com.geek.commonutils.result.R;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -26,4 +27,11 @@ public interface VodService {
      * @return
      */
     R deleteBatchVideo(List<String> videoIdList);
+
+    /**
+     * 根据云端视频id获得播放凭证
+     * @param videoId
+     * @return
+     */
+    String getPlayAuth(String videoId) throws ClientException;
 }

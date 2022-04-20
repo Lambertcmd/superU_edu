@@ -2,7 +2,7 @@ package com.geek.eduservice.service;
 
 import com.geek.eduservice.entity.EduChapter;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.geek.eduservice.entity.chapter.ChapterVo;
+import com.geek.eduservice.entity.dto.ChapterDTO;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface EduChapterService extends IService<EduChapter> {
      * @param courseId
      * @return
      */
-    List<ChapterVo> getChapterVideoByCourseId(String courseId);
+    List<ChapterDTO> getChapterVideoByCourseId(String courseId);
 
     /**
      * 根据章节id删除章节

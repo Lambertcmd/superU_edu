@@ -2,7 +2,7 @@ package com.geek.eduservice.controller.front;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.geek.commonutils.R;
+import com.geek.commonutils.result.R;
 import com.geek.eduservice.entity.EduCourse;
 import com.geek.eduservice.entity.EduTeacher;
 import com.geek.eduservice.service.EduCourseService;
