@@ -1,5 +1,6 @@
 package com.geek.commonutils.result;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -13,7 +14,7 @@ import java.util.Map;
  * @Date 2021/12/28 10:14
  * @Version 1.0
  **/
-//@ApiModel(value = "统一返回结果集")
+@ApiModel(value = "统一返回结果集")
 @Data
 public class R {
 

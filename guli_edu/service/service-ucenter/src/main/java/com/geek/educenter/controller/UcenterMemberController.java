@@ -74,5 +74,14 @@ public class UcenterMemberController {
         commentMemberInfo.setMemberId(member.getId());
         return commentMemberInfo;
     }
+
+    @ApiOperation("统计某日注册人数")
+    @GetMapping("/getRegisterCount/{date}")
+    public R getRegisterCount(@PathVariable("date") String date){
+        Integer count = memberService.getRegisterCount(date);
+        log.info("{}注册人数:{}",date,count);
+        return R.ok().data("RegisterCount",count);
+    }
+
 }
 

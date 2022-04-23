@@ -1,5 +1,8 @@
 package com.geek.eduorder.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -48,12 +51,15 @@ public class PayLog implements Serializable {
     @ApiModelProperty("其他属性")
     private String attr;
 
+    @TableLogic
     @ApiModelProperty("逻辑删除 1（true）已删除， 0（false）未删除")
     private Integer isDeleted;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty("创建时间")
     private Date gmtCreate;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty("更新时间")
     private Date gmtModified;
 

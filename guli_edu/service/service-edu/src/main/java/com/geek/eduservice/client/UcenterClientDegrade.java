@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 @Slf4j
-public class UcenterDegradeClient implements UcenterClient {
+public class UcenterClientDegrade implements UcenterClient {
 
     @Override
     public CommentMemberInfo getInfoById(String id) {

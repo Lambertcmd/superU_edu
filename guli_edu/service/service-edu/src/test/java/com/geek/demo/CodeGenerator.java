@@ -20,7 +20,7 @@ import java.util.Collections;
 public class CodeGenerator {
     static final String URL = "jdbc:mysql://localhost:3306/guli_edu?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=true";
     public static void main(String[] args) {
-        String projectPath = "D:\\guli_edu\\guli_edu\\service\\service_order";//获取项目路径
+        String projectPath = "D:\\guli_edu\\guli_edu\\service\\service_statistics";//获取项目路径
         FastAutoGenerator.create(URL, "root", "123456")
                 //全局配置
                 .globalConfig(builder -> {
@@ -34,7 +34,7 @@ public class CodeGenerator {
                 //包名配置
                 .packageConfig(builder -> {
                     builder.parent("com.geek")
-                            .moduleName("eduorder")
+                            .moduleName("edustatistics")
                             .service("service")
                             .serviceImpl("service.impl")
                             .controller("controller")
@@ -45,8 +45,8 @@ public class CodeGenerator {
                 })
                 //策略配置
                 .strategyConfig(builder -> {
-                    builder.addInclude("t_order","t_pay_log") //数据库表名 作为每个文件名开头
-                            .addTablePrefix("t_")//生成实体类时去掉表前缀
+                    builder.addInclude("statistics_daily") //数据库表名 作为每个文件名开头
+//                            .addTablePrefix("t_")//生成实体类时去掉表前缀
                             .serviceBuilder().formatServiceFileName("%sService")//去掉Service的 "I" 前缀
                             .controllerBuilder().enableRestStyle()//restful开启,url中驼峰转连字符
                             .enableHyphenStyle()//url改变 例如：index_id_1

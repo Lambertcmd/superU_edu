@@ -1,7 +1,9 @@
 package com.geek.eduservice.controller.front;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.geek.commonutils.jwt.JwtUtils;
 import com.geek.commonutils.result.R;
+import com.geek.eduservice.client.OrderClient;
 import com.geek.eduservice.entity.EduCourse;
 import com.geek.eduservice.entity.dto.ChapterDTO;
 import com.geek.eduservice.entity.frontdto.CourseInfoDTO;
@@ -16,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +39,8 @@ public class CourseFrontController {
     private EduCourseService courseService;
     @Autowired
     private EduChapterService chapterService;
+    @Autowired
+    private OrderClient orderClient;
 
     @ApiOperation("分页复杂查询课程列表")
     @ApiImplicitParams({
@@ -54,13 +59,19 @@ public class CourseFrontController {
 
     @ApiOperation("根据课程id查询课程详情页")
     @GetMapping("getFrontCourseInfo/{courseId}")
-    public R getFrontCourseInfo(@PathVariable("courseId") String courseId){
+    public R getFrontCourseInfo(@PathVariable("courseId") String courseId, HttpServletRequest request){
         //根据课程id 多表查询sql语句查询信息
         CourseInfoDTO courseInfoDTO = courseService.getBaseCourseInfo(courseId);
 
         //根据课程id查询课程大纲(章节和小节)
         List<ChapterDTO> chapterVoList = chapterService.getChapterVideoByCourseId(courseId);
-        return R.ok().data("courseInfoDTO", courseInfoDTO).data("chapterVoList",chapterVoList);
+        //远程调用，判断课程是否被用户购买
+        String memberId = JwtUtils.getMemberIdByJwtToken(request);
+        log.info("memberId："+memberId);
+        boolean isBuyCourse = orderClient.getIsBuyCourse(memberId, courseId);
+
+        return R.ok().data("courseInfoDTO", courseInfoDTO)
+                .data("chapterVoList",chapterVoList).data("isBuy", isBuyCourse);
     }
 
 }

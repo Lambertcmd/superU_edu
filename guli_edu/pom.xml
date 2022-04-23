@@ -9,6 +9,7 @@
     <modules>
         <module>service</module>
         <module>common</module>
+        <module>canal_client</module>
     </modules>
     <packaging>pom</packaging>
 

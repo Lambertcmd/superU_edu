@@ -51,7 +51,7 @@ public class EduCommentController {
         //通过token得到用户id
         String memberId = JwtUtils.getMemberIdByJwtToken(request);
         if (StringUtils.isBlank(memberId)) {
-            return R.error().code(28004).message("请登录");
+            return R.error().code(28004).message("请先登录！");
         }
         commentService.saveComment(comment, memberId);
         return R.ok();

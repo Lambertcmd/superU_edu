@@ -21,4 +21,13 @@ public interface OrderService extends IService<Order> {
      * @return
      */
     String createOrder(OrderVo orderVo, String memberId);
+
+    /**
+     * 根据订单号查询订单信息
+     * @param orderNo
+     * @return
+     */
+    Order getOrderByOrderNo(String orderNo);
+
+    boolean getIsBuyCourse(String memberId, String courseId);
 }

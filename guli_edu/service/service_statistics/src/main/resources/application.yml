@@ -1,21 +1,26 @@
 server:
-  port: 8007 #端口号
-
+  port: 8008 #端口号
 spring:
   application:
-    name: service-order #服务名
+    name: service-statistics #服务名
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver  # mysql数据库链接
     url: jdbc:mysql://localhost:3306/guli_edu?serverTimezone=GMT%2B8
     username: root
     password: 123456
+  jackson:
+    date-format: =yyyy-MM-dd HH:mm:ss #返回json的全局时间格式
+    time-zone: GMT+8
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848 #配置nacos服务地址
-  jackson:
-    date-format: =yyyy-MM-dd HH:mm:ss #返回json的全局时间格式
-    time-zone: GMT+8
+
+mybatis-plus:
+  mapper-locations: classpath:com/geek/edustatistics/mapper/xml/*.xml # 配置mapper xml文件的路径
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # mybatis日志
+
 feign:
   hystrix:
     enabled: true  #开启熔断机制
@@ -27,26 +32,8 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 3000  # 设置hystrix超时时间 默认1000ms
-mybatis-plus:
-  mapper-locations: classpath:com/geek/eduorder/mapper/xml/*.xml # 配置mapper xml文件的路径
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # mybatis日志
+
 logging:
   level:
     com.alibaba.nacos.client.naming: WARN
     com.alibaba.nacos.client.config.impl: WARN
-
-wx:
-  pay:
-    #关联的公众号appid
-    appid: wx74862e0dfcf69954
-    #商户号
-    mchId: 1558950191
-    #商户key
-    mchKey: T6m9iK73b0kn9g5v426MKfHQH7X8rKwb
-    #回调地址
-    notifyUrl: http://guli.shop/api/order/weixinPay/weixinNotify
-
-
-
-
