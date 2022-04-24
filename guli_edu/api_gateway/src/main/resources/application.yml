@@ -1,0 +1,60 @@
+server:
+  port: 8222 #服务端口
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #配置nacos服务地址
+    gateway:
+      discovery:
+        locator:
+          enabled: true  #使用服务发现路由
+          #          lower-case-service-id: true #服务路由名小写
+      routes:
+        - id: service-acl         #设置路由id
+          uri: lb://service-acl   #设置路由的uri
+          predicates:
+            - Path=/*/acl/** #设置路由断言,代理servicerId为auth-service的/auth/路径
+
+        - id: service-edu  #配置service-edu服务
+          uri: lb://service-edu
+          predicates:
+            - Path=/eduservice/**
+
+        - id: service-ucenter  #配置service-ucenter服务
+          uri: lb://service-ucenter
+          predicates:
+            - Path=/educenter/**
+            - Path=/api/ucenter/**
+
+        - id: service-cms  #配置service-cms服务
+          uri: lb://service-cms
+          predicates:
+            - Path=/educms/**
+
+        - id: service-msm  #配置service-msm服务
+          uri: lb://service-msm
+          predicates:
+            - Path=/edumsm/**
+
+        - id: service-order  #配置service-order服务
+          uri: lb://service-order
+          predicates:
+            - Path=/eduorder/**
+
+        - id: service-oss  #配置service-oss服务
+          uri: lb://service-oss
+          predicates:
+            - Path=/eduoss/**
+
+        - id: service-statistics  #配置service-statistics服务
+          uri: lb://service-statistics
+          predicates:
+            - Path=/edustatistics/**
+
+        - id: service-vod  #配置service-vod服务
+          uri: lb://service-vod
+          predicates:
+            - Path=/eduvod/**

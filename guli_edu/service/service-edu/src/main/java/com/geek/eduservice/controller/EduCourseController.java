@@ -26,7 +26,6 @@ import java.util.List;
 @RestController
 @Slf4j
 @Api(tags = "课程管理")
-@CrossOrigin
 @RequestMapping("/eduservice/edu-course")
 public class EduCourseController {
 

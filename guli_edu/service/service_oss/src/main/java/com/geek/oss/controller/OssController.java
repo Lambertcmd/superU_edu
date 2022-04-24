@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
  * @Version 1.0
  **/
 @RestController
-@CrossOrigin
 @Slf4j
 @Api(tags = "阿里云OSS文件上传")
 @RequestMapping("/eduoss/file-oss")

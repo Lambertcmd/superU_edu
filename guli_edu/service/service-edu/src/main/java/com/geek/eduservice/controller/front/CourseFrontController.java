@@ -31,7 +31,6 @@ import java.util.Map;
  **/
 @RestController
 @Slf4j
-@CrossOrigin
 @Api(tags = "前台课程模块接口")
 @RequestMapping("/eduservice/coursefront")
 public class CourseFrontController {

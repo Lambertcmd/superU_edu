@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
  * @since 2022-03-23
  */
 @RestController
-@CrossOrigin
 @Slf4j
 @Api(tags = "后台轮播管理")
 @RequestMapping("/educms/bannerAdmin")

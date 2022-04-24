@@ -23,7 +23,6 @@ import java.util.List;
  **/
 @RestController
 @Slf4j
-@CrossOrigin
 @Api(tags = "前台轮播")
 @RequestMapping("/educms/bannerFront")
 public class BannerFrontController {

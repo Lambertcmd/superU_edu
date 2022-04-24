@@ -10,6 +10,7 @@
         <module>service</module>
         <module>common</module>
         <module>canal_client</module>
+        <module>api_gateway</module>
     </modules>
     <packaging>pom</packaging>
 

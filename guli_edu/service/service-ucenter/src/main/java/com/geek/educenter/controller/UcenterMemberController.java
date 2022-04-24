@@ -28,7 +28,6 @@ import java.util.Optional;
  * @author Lambert
  * @since 2022-04-12
  */
-@CrossOrigin
 @RestController
 @Slf4j
 @Api(tags = "用户模块")

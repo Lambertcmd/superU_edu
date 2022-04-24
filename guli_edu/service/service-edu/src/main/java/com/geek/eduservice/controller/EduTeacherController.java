@@ -26,7 +26,6 @@ import java.util.List;
  */
 @Api(tags = "讲师管理")
 @Slf4j
-@CrossOrigin //跨域 浏览器从一个域名的网页去请求另一个域名的资源时，域名、端口、协议任一不同，都是跨域 。前后端分离开发中，需要考虑ajax跨域的问题,这里我们可以从服务端解决这个问题
 @RestController
 @RequestMapping("/eduservice/edu-teacher")
 public class EduTeacherController {

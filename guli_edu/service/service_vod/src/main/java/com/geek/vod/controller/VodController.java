@@ -23,7 +23,6 @@ import java.util.List;
  * @Version 1.0
  **/
 @RestController
-@CrossOrigin
 @Slf4j
 @Api(tags = "阿里云视频点播服务")
 @RequestMapping("/eduvod/video")

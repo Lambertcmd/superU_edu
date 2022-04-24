@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
  * @since 2022-01-23
  */
 @RestController
-@CrossOrigin
 @Slf4j
 @Api(tags = "小节管理")
 @RequestMapping("/eduservice/edu-video")

@@ -24,7 +24,6 @@ import java.util.Map;
  * @since 2022-04-22
  */
 @RestController
-@CrossOrigin
 @Slf4j
 @Api(tags = "数据统计管理")
 @RequestMapping("/edustatistics/statistics-daily")

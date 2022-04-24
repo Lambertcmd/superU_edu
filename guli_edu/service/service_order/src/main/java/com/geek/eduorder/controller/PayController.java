@@ -21,7 +21,6 @@ import java.util.Map;
  * @since 2022-04-20
  */
 @RestController
-@CrossOrigin
 @Slf4j
 @Api(tags = "微信Native支付接口")
 @RequestMapping("/eduorder/pay-log")

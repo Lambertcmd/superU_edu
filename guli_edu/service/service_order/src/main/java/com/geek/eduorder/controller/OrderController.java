@@ -28,7 +28,6 @@ import java.util.Optional;
  * @since 2022-04-20
  */
 @RestController
-@CrossOrigin
 @Slf4j
 @Api(tags = "订单功能")
 @RequestMapping("/eduorder/order")

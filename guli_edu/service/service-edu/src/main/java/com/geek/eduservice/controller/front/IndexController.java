@@ -22,7 +22,6 @@ import java.util.List;
  * @Version 1.0
  **/
 @Api(tags = "前台主页前端控制器")
-@CrossOrigin(origins = "*",allowCredentials="true")
 @RestController
 @RequestMapping("/eduservice/index")
 public class IndexController {

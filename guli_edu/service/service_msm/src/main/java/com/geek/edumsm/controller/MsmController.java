@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/edumsm/msm")
 @Slf4j
 @Api(tags = "阿里云短信服务")
-@CrossOrigin
 public class MsmController {
 
     @Autowired

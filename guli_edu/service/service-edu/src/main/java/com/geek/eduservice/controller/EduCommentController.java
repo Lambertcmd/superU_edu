@@ -34,7 +34,6 @@ import java.util.Optional;
  * @since 2022-04-20
  */
 @RestController
-@CrossOrigin
 @Slf4j
 @Api(tags = "评论功能")
 @RequestMapping("/eduservice/edu-comment")

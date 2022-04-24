@@ -18,14 +18,13 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 
 /**
- * @ClassName WxApiController
+ * @ClassName 微信授权登录
  * @Description TODO
  * @Author Lambert
  * @Date 2022/4/15 13:16
  * @Version 1.0
  **/
 @Controller //只是请求地址 不需要返回数据
-@CrossOrigin
 @Slf4j
 @RequestMapping("/api/ucenter/wx")
 public class WxApiController {
