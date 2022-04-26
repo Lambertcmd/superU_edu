@@ -42,7 +42,7 @@ public class Swagger3Config {
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 // 指定路径处理PathSelectors.any()代表所有的路径
 //                .paths(PathSelectors.any())
-                .paths(PathSelectors.ant("/admin/*").negate())//接口路径为/admin开头的任何接口不写入Swagger
+//                .paths(PathSelectors.ant("/admin/*").negate())//接口路径为/admin开头的任何接口不写入Swagger
                 .paths(PathSelectors.ant("/error.*").negate())
                 .build();
     }

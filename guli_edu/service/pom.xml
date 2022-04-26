@@ -21,6 +21,7 @@
         <module>service-ucenter</module>
         <module>service_order</module>
         <module>service_statistics</module>
+        <module>service_cal</module>
     </modules>
 
     <dependencies>
