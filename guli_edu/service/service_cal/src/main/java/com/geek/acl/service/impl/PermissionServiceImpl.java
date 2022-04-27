@@ -218,6 +218,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         return resultList;
     }
 
+
     //把返回所有菜单list集合进行封装的方法
     public static List<Permission> bulidPermission(List<Permission> permissionList) {
 
@@ -270,6 +271,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         baseMapper.deleteBatchIds(idList);
     }
 
+
     //2 根据当前菜单id，查询菜单里面子菜单id，封装到list集合
     private void selectPermissionChildById(String id, List<String> idList) {
         //查询菜单里面子菜单id
@@ -285,6 +287,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
             this.selectPermissionChildById(item.getId(),idList);
         });
     }
+
 
     //=========================给角色分配菜单=======================
     @Override
@@ -305,4 +308,5 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         //添加到角色菜单关系表
         rolePermissionService.saveBatch(rolePermissionList);
     }
+
 }

@@ -4,6 +4,8 @@ package com.geek.acl.controller;
 import com.geek.acl.entity.Permission;
 import com.geek.acl.service.PermissionService;
 import com.geek.commonutils.result.R;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +44,10 @@ public class PermissionController {
     }
 
     @ApiOperation(value = "给角色分配权限")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "roleId",value = "角色id"),
+            @ApiImplicitParam(name = "permissionId",value = "权限id",dataType = "String",dataTypeClass = String.class)
+    })
     @PostMapping("/doAssign")
     public R doAssign(String roleId,String[] permissionId) {
         permissionService.saveRolePermissionRealtionShipGuli(roleId,permissionId);
