@@ -41,6 +41,7 @@ public class UcenterMemberController {
     @ApiOperation("用户登录")
     @PostMapping("login")
     public R loginUser(@RequestBody LoginVo loginVo){
+        log.info("用户登录：{}",loginVo.getMobile());
         //返回token值，使用jwt生成token
         String token = memberService.login(loginVo);
         return R.ok().data("token",token);

@@ -13,7 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @EnableFeignClients
 public class ServiceUcenterApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(ServiceUcenterApplication.class, args);
     }

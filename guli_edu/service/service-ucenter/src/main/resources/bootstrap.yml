@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: service-ucenter
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        namespace: 4bc579a9-0932-43f0-b692-4683a04c17f6
+        group: DEFAULT_GROUP
+        ext-config:
+          - data-id: jdbc.yaml
+            refresh: true
+          - data-id: redis.yaml
+            refresh: true  #开启动态刷新配置，否则配置文件修改 工程无法感知
+          - data-id: date-format.yaml
+            refresh: true
+          - data-id: log.yaml
+            refresh: true
+

@@ -26,8 +26,7 @@ spring:
         - id: service-ucenter  #配置service-ucenter服务
           uri: lb://service-ucenter
           predicates:
-            - Path=/educenter/**
-            - Path=/api/ucenter/**
+            - Path=/educenter/**,/api/ucenter/**
 
         - id: service-cms  #配置service-cms服务
           uri: lb://service-cms

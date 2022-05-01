@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: service-oss
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        namespace: 4bc579a9-0932-43f0-b692-4683a04c17f6
+        group: DEFAULT_GROUP
+        ext-config:
+          - data-id: log.yaml
+            refresh: true
