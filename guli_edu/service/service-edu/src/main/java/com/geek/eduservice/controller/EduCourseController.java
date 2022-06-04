@@ -108,6 +108,7 @@ public class EduCourseController {
     @GetMapping("getPublishCourseInfo/{id}")
     public R getPublishCourseInfo(@PathVariable("id") String courseId) {
         CoursePublishVo coursePublishVo = courseService.publishCourseInfo(courseId);
+        log.info("result:{}",R.ok().data("coursePublish",coursePublishVo));
         return R.ok().data("coursePublish", coursePublishVo);
     }
 

@@ -14,8 +14,8 @@ import com.geek.servicebase.exception.GuliException;
 import com.geek.vod.service.VodService;
 import com.geek.vod.utils.ConstantVodPropertiesUtil;
 import com.geek.vod.utils.InitVodClient;
-import com.sun.deploy.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

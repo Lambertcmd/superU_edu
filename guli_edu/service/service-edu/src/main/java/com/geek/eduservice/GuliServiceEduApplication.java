@@ -16,6 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
  **/
 @ComponentScan(basePackages = {"com.geek"})
 @SpringBootApplication
+@MapperScan("com.geek.eduservice.mapper")
 @EnableDiscoveryClient //nacos注册
 @EnableFeignClients    //Feign服务调用
 public class GuliServiceEduApplication {

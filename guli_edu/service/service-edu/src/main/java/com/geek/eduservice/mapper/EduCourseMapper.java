@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
-    public CoursePublishVo getPublishCourseInfo(String courseId);
+    CoursePublishVo getPublishCourseInfo(String courseId);
 
     /**
      * 根据课程id查询课程详情页信息
