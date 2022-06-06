@@ -12,7 +12,7 @@
 #  cloud:
 #    nacos:
 #      discovery:
-#        server-addr: localhost:8848 #配置nacos服务地址
+#        server-addr:  #配置nacos服务地址
 #  jackson:
 #    date-format: =yyyy-MM-dd HH:mm:ss #返回json的全局时间格式
 #    time-zone: GMT+8
