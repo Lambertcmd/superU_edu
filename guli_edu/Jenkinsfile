@@ -7,8 +7,7 @@ node{
         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], extensions: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
     }
     stage('编译，构建镜像') {
-
-        sh "mvn -f guli_edu/common clean install"
+        sh "mvn -f guli_edu clean install"
 
         sh "mvn -f guli_edu/api_gateway clean package"
 
