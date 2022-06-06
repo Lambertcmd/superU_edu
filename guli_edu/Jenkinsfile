@@ -9,8 +9,6 @@ node{
     stage('编译，构建镜像') {
         sh "mvn -f guli_edu clean install"
 
-        sh "mvn -f guli_edu/api_gateway clean package"
-
         sh "mvn -f guli_edu/service/${project_name} clean package dockerfile:build"
     }
 }
