@@ -1,8 +1,9 @@
 def git_auth = "47603b91-4a76-4b71-a19d-800f13049567"
 
 def git_url = "git@gitee.com:lambertee/guli_edu.git"
+
 node{
     stage('pull project'){
-        checkout([$class: 'GitSCM', branches: [[name: '*/${branch}']], extensions: [], userRemoteConfigs: [[credentialsId: '${git_auth}', url: '${git_url}']]])
+        checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], extensions: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
     }
 }
