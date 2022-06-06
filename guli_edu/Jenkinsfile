@@ -11,6 +11,6 @@ node{
 
         sh "mvn -f guli_edu/api_gateway clean package"
 
-        sh "mvn -f guli_edu/service/${project_name} clean package"
+        sh "mvn -f guli_edu/service/${project_name} clean package dockerfile:build"
     }
 }
