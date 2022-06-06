@@ -1,12 +1,37 @@
+//gitee的凭证
 def git_auth = "47603b91-4a76-4b71-a19d-800f13049567"
-
+//git仓库路径
 def git_url = "git@gitee.com:lambertee/guli_edu.git"
+//镜像版本号
+def tag = "latest"
+//Harbor的url地址
+def harbor_url = "192.168.15.133:85"
+//Harbor镜像库的名称
+def harbor_project = "guli_edu"
+//Harbor的登录凭证ID
+def harbor_auth = "e8f21bb4-198b-43c0-9baa-51aad0cb3b8c"
 
 node{
     stage('pull project'){
         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], extensions: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
     }
-    stage('编译，构建镜像') {
+    stage('编译打包模块，构建镜像') {
         sh "mvn -f guli_edu/service/${project_name} clean package dockerfile:build"
+    }
+    stage('上传镜像'){
+        //定义镜像名
+        def imagesName = "${project_name}:${tag}"
+        //对镜像打上标签
+        sh "docker tag ${imagesName} ${harbor_url}/${harbor_project}/${imagesName}"
+        //将镜像推送到Harbor(登录Harbor后推送镜像)
+
+        withCredentials([usernamePassword(credentialsId: "${harbor_auth}", passwordVariable: 'password', usernameVariable: 'username')]) {
+            //登录Harbor
+            sh "docker login -u ${username} -p ${password} ${harbor_url}"
+            //镜像上传
+            sh "docker push ${harbor_url}/${harbor_project}/${imagesName}"
+            sh "echo '镜像上传成功'"
+        }
+
     }
 }
