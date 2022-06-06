@@ -8,7 +8,7 @@ node{
     }
     stage('编译，构建镜像') {
 
-        sh "mvn -f common clean install"
+        sh "mvn -f guli_edu/common clean install"
 
         sh "mvn -f ${project_name} clean package"
     }
