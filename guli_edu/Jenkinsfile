@@ -6,13 +6,11 @@ node{
     stage('pull project'){
         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], extensions: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
     }
-    stage('code checking'){
-        def scannerHome = tool 'sonar-scanner'
-        withSonarQubeEnv('sonarqube6.7.7') {
-        	sh """
-        	        cd guli_edu/service/${project_name}
-        	        ${scannerHome}/bin/sonar-scanner
-        	"""
-        }
+    stage('编译，构建镜像') {
+        def imageName = "${project_name}:${tag}"
+
+        sh "mvn -f common clean install"
+
+        sh "mvn -f ${project_name} clean package dockerfile:build"
     }
 }
