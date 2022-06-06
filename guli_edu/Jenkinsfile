@@ -7,8 +7,6 @@ node{
         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], extensions: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
     }
     stage('编译，构建镜像') {
-        sh "mvn -f guli_edu clean install"
-
         sh "mvn -f guli_edu/service/${project_name} clean package dockerfile:build"
     }
 }
