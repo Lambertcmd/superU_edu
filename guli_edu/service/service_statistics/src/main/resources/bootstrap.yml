@@ -11,7 +11,7 @@ spring:
       config:
         server-addr: 192.168.15.132:8848
         file-extension: yaml
-        namespace: 4bc579a9-0932-43f0-b692-4683a04c17f6
+        namespace: 04ba2e93-661c-4529-8930-f507b1a0ffaa
         group: DEFAULT_GROUP
         ext-config:  #多配置文件配置
           - data-id: jdbc.yaml
