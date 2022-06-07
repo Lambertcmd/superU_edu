@@ -5,7 +5,7 @@ spring:
   application:
     name: service-cms
   profiles:
-    active: dev
+    active: test
   cloud:
     nacos:
       discovery:

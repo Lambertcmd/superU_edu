@@ -5,7 +5,7 @@ spring:
   application:
     name: service-ucenter
   profiles:
-    active: dev
+    active: test
   cloud:
     nacos:
       discovery:

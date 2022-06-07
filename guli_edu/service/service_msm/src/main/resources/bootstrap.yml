@@ -4,7 +4,7 @@ spring:
   application:
     name: service-msm
   profiles:
-    active: dev
+    active: test
   cloud:
     nacos:
       discovery:
